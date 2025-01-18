@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vite App</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="display-6 mb-3 mt-3">Bike App</h1>
+
+            <div id="app"></div>
+
+            <div class="card mb-4">
+                <div
+                    class="card-header d-flex justify-content-between align-items-center"
+                >
+                    <h5>Watch</h5>
+                    <button
+                        id="connect-watch"
+                        type="button"
+                        class="btn btn-primary"
+                    >
+                        Connect Watch
+                    </button>
+                </div>
+
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="heart-rate" class="form-label"
+                            >Heart rate</label
+                        >
+                        <input id="heart-rate" class="form-control" />
+                    </div>
+                    <div id="watch-message" class="alert" role="alert"></div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div
+                    class="card-header d-flex justify-content-between align-items-center"
+                >
+                    <h5>GPS</h5>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="lat" class="form-label"
+                                    >Latitude</label
+                                >
+                                <input id="lat" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="lng" class="form-label"
+                                    >Longitude</label
+                                >
+                                <input id="lng" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="speed" class="form-label"
+                                    >Speed</label
+                                >
+                                <input id="speed" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="weather" class="form-label"
+                            >Temperature</label
+                        >
+                        <input id="weather" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div
+                    class="card-header d-flex justify-content-between align-items-center"
+                >
+                    <h5>ESP32</h5>
+                </div>
+
+                <div class="card-body">
+                    <button id="connect-esp32" class="btn btn-primary">
+                        Connect ESP32
+                    </button>
+                    <button id="disconnect-esp32" class="btn btn-primary">
+                        Disconnect ESP32
+                    </button>
+                    <div id="messages" class="alert mt-3" role="alert"></div>
+                </div>
+            </div>
+        </div>
+        <script type="module" src="/src/main.js"></script>
+    </body>
+</html>
