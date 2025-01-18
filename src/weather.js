@@ -1,7 +1,13 @@
 import { updateInput } from "../utils/updateInput";
 const API_KEY = import.meta.env.VITE_OPENWEATHERMAP_API_KEY;
 
-export function setupWeather({ weatherInput, latInput, lngInput }) {
+export function setupWeather({
+    weatherInput,
+    tempInput,
+    iconInput,
+    latInput,
+    lngInput,
+}) {
     let lat = latInput.value;
     let lng = lngInput.value;
 
@@ -28,7 +34,9 @@ export function setupWeather({ weatherInput, latInput, lngInput }) {
         )
             .then((response) => response.json())
             .then((weatherData) => {
-                updateInput(weatherInput, weatherData?.main.temp);
+                updateInput(tempInput, weatherData?.main.temp);
+                updateInput(weatherInput, weatherData?.weather?.[0]?.main);
+                updateInput(iconInput, weatherData?.weather?.[0]?.icon);
             });
     };
 

@@ -11,13 +11,17 @@ const speedInput = document.querySelector("#speed");
 const latInput = document.querySelector("#lat");
 const lngInput = document.querySelector("#lng");
 const heartRateInput = document.querySelector("#heart-rate");
+const tempInput = document.querySelector("#temp");
 const weatherInput = document.querySelector("#weather");
+const iconInput = document.querySelector("#icon");
 const timeInput = document.querySelector("#time");
 
 setupWeather({
     latInput,
     lngInput,
     weatherInput,
+    tempInput,
+    iconInput,
 });
 
 setupGarmin({
@@ -27,11 +31,12 @@ setupGarmin({
 });
 setupESP32({
     connectButton: document.querySelector("#connect-esp32"),
-    disconnectButton: document.querySelector("#disconnect-esp32"),
     messageContainer: document.querySelector("#messages"),
     speedInput,
     heartRateInput,
     weatherInput,
+    tempInput,
+    iconInput,
     timeInput,
 });
 setupGPS({

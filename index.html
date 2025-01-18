@@ -42,15 +42,12 @@
                     class="card-header d-flex justify-content-between align-items-center"
                 >
                     <h5>ESP32</h5>
-                </div>
-
-                <div class="card-body">
                     <button id="connect-esp32" class="btn btn-primary">
                         Connect ESP32
                     </button>
-                    <button id="disconnect-esp32" class="btn btn-primary">
-                        Disconnect ESP32
-                    </button>
+                </div>
+
+                <div class="card-body">
                     <div id="messages" class="alert mt-3" role="alert"></div>
                 </div>
             </div>
@@ -89,11 +86,33 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="weather" class="form-label"
-                            >Temperature</label
-                        >
-                        <input id="weather" class="form-control" />
+                    <hr>
+                    <h4>Weather</h2>
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="temp" class="form-label"
+                                    >Temperature</label
+                                >
+                                <input id="temp" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="weather" class="form-label"
+                                    >Condition</label
+                                >
+                                <input id="weather" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="icon" class="form-label"
+                                    >Condition Icon</label
+                                >
+                                <input id="icon" class="form-control" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

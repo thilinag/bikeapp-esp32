@@ -3,11 +3,12 @@ import { showMessage } from "../utils/showMessage";
 
 export function setupESP32({
     connectButton,
-    disconnectButton,
     heartRateInput,
     speedInput,
     timeInput,
     weatherInput,
+    tempInput,
+    iconInput,
     messageContainer,
 }) {
     //Define BLE Device Specs
@@ -18,6 +19,7 @@ export function setupESP32({
     //Global Variables to Handle Bluetooth
     let bleServer;
     let bleServiceFound;
+    const queue = [];
 
     // Connect Button (search for BLE Devices only if BLE is available)
     connectButton.addEventListener("click", (event) => {
@@ -25,9 +27,6 @@ export function setupESP32({
             connectToDevice();
         }
     });
-
-    // Disconnect Button
-    disconnectButton.addEventListener("click", disconnectDevice);
 
     // Check if BLE is available in your Browser
     function isWebBluetoothEnabled() {
@@ -90,12 +89,6 @@ export function setupESP32({
         connectToDevice();
     }
 
-    function handleCharacteristicChange(event) {
-        const newValueReceived = new TextDecoder().decode(event.target.value);
-        console.log("Characteristic value changed: ", newValueReceived);
-        retrievedValue.innerHTML = newValueReceived;
-    }
-
     function writeOnCharacteristic(value) {
         if (bleServer && bleServer.connected) {
             bleServiceFound
@@ -125,8 +118,8 @@ export function setupESP32({
         }
     }
 
-    function disconnectDevice() {
-        console.log("Disconnect Device.");
+    function addToQueue(value) {
+        queue.push(value);
     }
 
     // broadcast input changes
@@ -134,28 +127,59 @@ export function setupESP32({
     heartRateInput.addEventListener("input", (e) => {
         const heartRate = e.target.value;
         if (heartRate.trim()) {
-            writeOnCharacteristic(`H${heartRate}`);
+            addToQueue(`H${heartRate}`);
         }
     });
 
     speedInput.addEventListener("input", (e) => {
         const speed = e.target.value;
         if (speed.trim()) {
-            writeOnCharacteristic(`S${msToKmh(speed)}`);
+            addToQueue(`S${msToKmh(speed)}`);
+        }
+    });
+
+    tempInput.addEventListener("input", (e) => {
+        const temp = e.target.value;
+        if (temp.trim()) {
+            addToQueue(`T${Math.round(temp)}°C`);
         }
     });
 
     weatherInput.addEventListener("input", (e) => {
         const weather = e.target.value;
         if (weather.trim()) {
-            writeOnCharacteristic(`W${Math.round(weather)}°C`);
+            addToQueue(`W${weather}`);
+        }
+    });
+
+    iconInput.addEventListener("input", (e) => {
+        const icon = e.target.value;
+        if (icon.trim()) {
+            addToQueue(`I${icon}`);
         }
     });
 
     timeInput.addEventListener("input", (e) => {
         const time = e.target.value;
         if (time.trim()) {
-            writeOnCharacteristic(`T${time}`);
+            addToQueue(`C${time}`);
         }
     });
+
+    // send to BLE
+    setInterval(() => {
+        console.log({ queue });
+        if (
+            !bleServer ||
+            !bleServer.connected ||
+            !bleServiceFound ||
+            queue.length === 0
+        ) {
+            console.log("not ready");
+            return;
+        }
+
+        const message = queue.shift();
+        writeOnCharacteristic(message);
+    }, 250);
 }
