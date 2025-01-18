@@ -144,4 +144,18 @@ export function setupESP32({
             writeOnCharacteristic(`S${msToKmh(speed)}`);
         }
     });
+
+    weatherInput.addEventListener("input", (e) => {
+        const weather = e.target.value;
+        if (weather.trim()) {
+            writeOnCharacteristic(`W${Math.round(weather)}°C`);
+        }
+    });
+
+    timeInput.addEventListener("input", (e) => {
+        const time = e.target.value;
+        if (time.trim()) {
+            writeOnCharacteristic(`T${time}`);
+        }
+    });
 }

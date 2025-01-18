@@ -5,12 +5,14 @@ import { setupGarmin } from "./garmin.js";
 import { setupESP32 } from "./esp32.js";
 import { setupGPS } from "./gps.js";
 import { setupWeather } from "./weather.js";
+import { setupTime } from "./time.js";
 
 const speedInput = document.querySelector("#speed");
 const latInput = document.querySelector("#lat");
 const lngInput = document.querySelector("#lng");
 const heartRateInput = document.querySelector("#heart-rate");
 const weatherInput = document.querySelector("#weather");
+const timeInput = document.querySelector("#time");
 
 setupWeather({
     latInput,
@@ -29,9 +31,14 @@ setupESP32({
     messageContainer: document.querySelector("#messages"),
     speedInput,
     heartRateInput,
+    weatherInput,
+    timeInput,
 });
 setupGPS({
     speedInput,
     latInput,
     lngInput,
+});
+setupTime({
+    timeInput,
 });
