@@ -141,7 +141,7 @@ export function setupESP32({
     tempInput.addEventListener("input", (e) => {
         const temp = e.target.value;
         if (temp.trim()) {
-            addToQueue(`T${Math.round(temp)}°C`);
+            addToQueue(`T${Math.round(temp)}`);
         }
     });
 
