@@ -22,6 +22,7 @@ setupWeather({
     weatherInput,
     tempInput,
     iconInput,
+    requestsInput: document.querySelector("#requests"),
 });
 
 setupGarmin({
