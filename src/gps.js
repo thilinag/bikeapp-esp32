@@ -4,7 +4,7 @@ const ACCURACY_THRESHOLD = 20;
 
 export function setupGPS({ speedInput, latInput, lngInput }) {
     const handleEvent = (event) => {
-        if (event.coords.speed && event.coords.accuracy > ACCURACY_THRESHOLD) {
+        if (event.coords.speed) {
             updateInput(speedInput, event.coords.speed);
         }
 
